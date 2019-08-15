@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
     <!-- 顶部header区域 -->
     <van-nav-bar
       title="标题"
@@ -11,15 +11,21 @@
     />
 
     <!-- 中间的内容 路由router-view区域 -->
-    <h1>这是app组件</h1>
+    <transition>
+      <router-view></router-view>
+    </transition>
 
     <!-- 底部 Tarbar区域 -->
 
-    <van-tabbar v-model="active">
-      <van-tabbar-item name="home" icon="home-o">标签</van-tabbar-item>
-      <van-tabbar-item name="search" icon="search">标签</van-tabbar-item>
-      <van-tabbar-item name="friends" icon="friends-o">标签</van-tabbar-item>
-      <van-tabbar-item name="setting" icon="setting-o">标签</van-tabbar-item>
+    <van-tabbar route>
+      <van-tabbar-item replace
+        to="/home" icon="home-o">首页</van-tabbar-item>
+      <van-tabbar-item replace
+        to="/member" icon="friends-o">会员</van-tabbar-item>
+      <van-tabbar-item replace
+        to="/shopcar" icon="cart-o" info="0">购物车</van-tabbar-item>
+      <van-tabbar-item replace
+        to="/search" icon="search">搜索</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -46,6 +52,20 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-
+<style lang="scss" scoped>
+.app-container{
+  overflow-x: hidden;
+}
+.v-enter{
+  opacity:0;
+  transform:translateX(100%);
+}
+.v-leave-to{
+  opacity: 0;
+  position: absolute;
+  transform: translateX(-100%);
+}
+.v-enter-active,.v-leave-active{
+  transition:all 0.5s ease;
+}
 </style>
