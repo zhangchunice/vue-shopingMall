@@ -5,6 +5,9 @@ import MemberContainer from './components/tabbar/MemberContainer.vue'
 import ShopcarContainer from './components/tabbar/ShopcarContainer.vue'
 import SearchContainer from './components/tabbar/SearchContainer.vue'
 
+import NewsList from './components/home/NewsList.vue'
+import NewsInfo from './components/home/NewsInfo.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -15,6 +18,8 @@ export default new Router({
     { path: '/home', component: HomeContainer },
     { path: '/member', component: MemberContainer },
     { path: '/shopcar', component: ShopcarContainer },
-    { path: '/search', component: SearchContainer }
+    { path: '/search', component: SearchContainer },
+    { path: '/home/newslist', component: NewsList },
+    { path: '/home/newsinfo/:id', component: NewsInfo }
   ]
 })

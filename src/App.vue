@@ -12,7 +12,9 @@
 
     <!-- 中间的内容 路由router-view区域 -->
     <transition>
+      <keep-alive>
       <router-view></router-view>
+      </keep-alive>
     </transition>
 
     <!-- 底部 Tarbar区域 -->
@@ -55,6 +57,7 @@ export default {
 <style lang="scss" scoped>
 .app-container{
   overflow-x: hidden;
+  padding-bottom: 50px;
 }
 .v-enter{
   opacity:0;
@@ -62,8 +65,9 @@ export default {
 }
 .v-leave-to{
   opacity: 0;
-  position: absolute;
   transform: translateX(-100%);
+  position: absolute;
+  width: 100%;
 }
 .v-enter-active,.v-leave-active{
   transition:all 0.5s ease;

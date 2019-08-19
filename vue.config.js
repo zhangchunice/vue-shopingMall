@@ -6,16 +6,9 @@ module.exports = {
     proxy: {
       '/api': {
         target: 'https://news-at.zhihu.com/',
+        // target: 'http://www.liulongbin.top:3005/',
         ws: true,
         changeOrigin: true
-      },
-      '/weather': {
-        target: 'http://v.juhe.cn',
-        ws: true,
-        changeOrigin: true,
-        pathRewrite: {
-          '^/weather': ''
-        }
       }
     }
   }
