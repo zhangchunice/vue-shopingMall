@@ -1,17 +1,12 @@
 <template>
   <div>
     <!-- 首页轮播 -->
-    <van-swipe :autoplay="3000" indicator-color="white" class="swipe-box">
+    <!-- <van-swipe :autoplay="3000" indicator-color="white" class="swipe-box">
       <van-swipe-item v-for="(item,index) in swipelist" v-bind:key="index">
         <img v-lazy="item.thumbnail" />
-        <!-- <van-image
-          round v-lazy
-          width="10rem"
-          height="10rem"
-          src="item.thumbnail"
-        />-->
       </van-swipe-item>
-    </van-swipe>
+    </van-swipe> -->
+    <swiper v-bind:swipelist="swipelist" :isFull="true"></swiper>
     <!-- 首页六宫格 -->
     <van-grid clickable :column-num="3">
       <van-grid-item
@@ -22,15 +17,11 @@
         :to="value.path"
       />
     </van-grid>
-      <!-- <van-grid-item v-for="value in iconlist" :key="value.index">
-          <img :src="value.icon" />
-          <div>{{value.text}}</div>
-      </van-grid-item>-->
-      <!-- <van-grid-item icon="/images/menu1.png" text="路由跳转" to="/"/> -->
   </div>
 </template>
 
 <script>
+import swiper from '../subcomponents/swiper.vue'
 export default {
   data () {
     return {
@@ -38,19 +29,21 @@ export default {
       iconlist: [
         {
           value: 0,
-          icon: '/images/menu1.png',
+          icon: '/images/menu1.png', //images要放在public文件夹下
           text: '新闻资讯',
           path: '/home/newslist'
         },
         {
           value: 1,
           icon: require('./../../assets/menu2.png'),
-          text: '图片分享'
+          text: '图片分享',
+          path: '/home/photolist'
         },
         {
           value: 2,
-          icon: require('./../../assets/menu3.png'),
-          text: '商品购买'
+          icon: '/images/menu3.png',
+          text: '商品购买',
+          path: '/home/goodslist'
         },
         {
           value: 3,
@@ -72,6 +65,9 @@ export default {
   },
   created () {
     this.getSwipe()
+  },
+  components: {
+    swiper
   },
   methods: {
     getSwipe () {
@@ -96,16 +92,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.van-swipe {
-  height: 200px;
-  background-color: #f5f5f5;
-  .van-swipe-item {
-    img {
-      height: 200px;
-      width: 100%;
-    }
-  }
-}
+
 // /deep/ .van-grid-item__content{
 //   background-color: red !important;
 // }

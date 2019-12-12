@@ -20,6 +20,9 @@ export default new Router({
     { path: '/shopcar', component: ShopcarContainer },
     { path: '/search', component: SearchContainer },
     { path: '/home/newslist', component: NewsList },
-    { path: '/home/newsinfo/:id', component: NewsInfo }
+    { path: '/home/newsinfo/:id', component: NewsInfo },
+    { path: '/home/photolist', component: () => import('./components/home/PhotoList.vue') },
+    { path: '/home/goodslist', component: () => import('./components/home/goodsList.vue') },
+    { path: '/home/goodsinfo/:id', component: () => import('./components/home/goodsinfo.vue') }
   ]
 })

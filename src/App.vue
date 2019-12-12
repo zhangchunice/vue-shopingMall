@@ -25,7 +25,7 @@
       <van-tabbar-item replace
         to="/member" icon="friends-o">会员</van-tabbar-item>
       <van-tabbar-item replace
-        to="/shopcar" icon="cart-o" info="0">购物车</van-tabbar-item>
+        to="/shopcar" icon="cart-o" info="0" id='badge'>购物车</van-tabbar-item>
       <van-tabbar-item replace
         to="/search" icon="search">搜索</van-tabbar-item>
     </van-tabbar>
@@ -55,6 +55,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .app-container{
   overflow-x: hidden;
   padding-bottom: 50px;
