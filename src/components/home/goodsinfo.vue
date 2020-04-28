@@ -2,10 +2,12 @@
   <div>
     <swiper v-bind:swipelist="swipelist" :isFull="false"></swiper>
     <div>
-      <p class="font-18">售价:￥{{info.price}}</p>
-      <div class="font-18 flex-col">数量:
+      <p>{{info.title}}</p>
+      <p class="font-18">售价:{{ info.price }}</p>
+      <div class="font-18 flex-col">
+        数量:
         <div class="numchange" v-on:click="reduceNum">-</div>
-        {{salenum}}
+        {{ salenum }}
         <div @click="addNum" class="numchange">+</div>
       </div>
       <van-button type="warning" v-on:click="addShopcar">加入购物车</van-button>
@@ -13,7 +15,8 @@
     <transition
       @before-enter="beforEnter"
       @enter="enter"
-      @after-enter="afterEnter">
+      @after-enter="afterEnter"
+    >
       <div class="ball" ref="ball" v-show="ballFlag"></div>
     </transition>
   </div>
@@ -25,16 +28,39 @@ export default {
   data () {
     return {
       swipelist: [],
-      info: {
-        num: 10,
-        price: '1999'
-      },
-      salenum: 1,
+      info: '',
+      salenum: '1',
       ballFlag: false // 控制小球隐藏显示
     }
   },
+  // beforeCreate () {
+  //   console.log('befoecreate')
+  // },
+  // created () {
+  //   console.log('created')
+  // },
+  // beforeMount () {
+  //   console.log('beforemout')
+  // },
+  // mounted () {
+  //   console.log('mouted')
+  // },
+  // beforeUpdate () {
+  //   console.log('beforupdate')
+  // },
+  // updated () {
+  //   console.log('updated')
+  // },
+  // beforeDestroy () {
+  //   console.log('beforedestory')
+  // },
+  // destroyed () {
+  //   console.log('destoryed')
+  // },
   created () {
-    console.log(this.$route.params.id)
+    console.log(this.$route.params)
+    this.info = this.$route.params
+    console.log(this.info)
     this.getInfo()
     // this.getxDetail() //获取详情数据就是info
   },
@@ -45,7 +71,10 @@ export default {
     getInfo () {
       this.$axios.get('/3/section/1').then(res => {
         console.log(res)
-        this.swipelist.push({ 'thumbnail': res.data.stories[0].images[0] }, { 'thumbnail': res.data.stories[1].images[0] })
+        this.swipelist.push(
+          { thumbnail: res.data.stories[0].images[0] },
+          { thumbnail: res.data.stories[1].images[0] }
+        )
         console.log(this.swipelist)
       })
     },
@@ -63,13 +92,28 @@ export default {
     //   })
     // },
     reduceNum () {
-      this.salenum = this.salenum >= 1 ? --this.salenum : this.salenum
+      this.salenum = this.salenum > 1 ? --this.salenum : this.salenum
+      // this.$store.commit('subtract')
     },
     addNum () {
-      this.salenum = this.salenum < this.info.num ? ++this.salenum : this.salenum
+      this.salenum = this.salenum ? ++this.salenum : this.salenum
+      // this.$store.commit('increment')
     },
     addShopcar () {
       this.ballFlag = !this.ballFlag
+      // {id:商品id,count:数量，price:价格，title：商品名称，selected:商品选中状态}
+      // 拼接一个要保存到stroe中的对象
+      var goodsinfo = {
+        id: this.info.id,
+        count: parseInt(this.salenum),
+        price: this.info.price,
+        title: this.info.title,
+        selected: true
+      }
+      console.log(this.salenum)
+      console.log(typeof goodsinfo.count)
+      // 调用store中的方法，将商品加入购物车
+      this.$store.commit('addTocar', goodsinfo)
     },
     beforEnter (el) {
       el.style.transform = 'translate(0,0)'
@@ -86,7 +130,8 @@ export default {
 
       // 获取小球在页面中的位置，ref用来给元素或者子组件的注册信息
       const ballPosition = this.$refs.ball.getBoundingClientRect()
-      const badgePosition = document.getElementById('badge')
+      const badgePosition = document
+        .getElementById('badge')
         .getElementsByClassName('van-info')[0]
         .getBoundingClientRect()
       const x = badgePosition.left - ballPosition.left
@@ -103,13 +148,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.font-18{
-  font-size:18px;
+.font-18 {
+  font-size: 18px;
 }
-.flex-col{
+.flex-col {
   display: flex;
 }
-.numchange{
+.numchange {
   background: #ccc;
   height: 20px;
   width: 20px;
@@ -117,7 +162,7 @@ export default {
   vertical-align: middle;
   text-align: center;
 }
-.ball{
+.ball {
   height: 15px;
   width: 15px;
   border-radius: 50%;

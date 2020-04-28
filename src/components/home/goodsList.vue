@@ -2,13 +2,13 @@
   <div class="goods-list">
 
     <div class="goods-item" v-for="(item, index) in goodlist" v-bind:key="index"
-    v-on:click="goInfo(item.id)">
+    v-on:click="goInfo(item.id,item.price,item.title)">
       <img src="https://img.yzcdn.cn/vant/cat.jpeg" alt="">
       <h4 class="title">{{item.title}}</h4>
       <div class="info">
         <p class="price">
-          <span class="now">{{item.price}}</span>
-          <span class="old">{{item.oldprice}}</span>
+          <span class="now">￥{{item.price}}</span>
+          <span class="old">￥{{item.oldprice}}</span>
         </p>
         <p class="sell">
           <span>{{item.state}}</span>
@@ -28,40 +28,40 @@ export default {
         {
           id: '1',
           title: '小米(Mi)小米Note 16G双网通版',
-          price: '￥2199',
-          oldprice: '￥2399',
+          price: '2199',
+          oldprice: '2399',
           state: '热卖中',
           left: '60'
         },
         {
           id: '2',
           title: '华为P30 168G双网通版',
-          price: '￥3999',
-          oldprice: '￥4299',
+          price: '3999',
+          oldprice: '4299',
           state: '热卖中',
           left: '19'
         },
         {
           id: '3',
           title: '苹果6s 64G双网通版',
-          price: '￥1199',
-          oldprice: '￥1699',
+          price: '1199',
+          oldprice: '1699',
           state: '热卖中',
           left: '5'
         },
         {
           id: '4',
           title: '魅族6 16G双网通版',
-          price: '￥999',
-          oldprice: '￥1399',
+          price: '999',
+          oldprice: '1399',
           state: '热卖中',
           left: '46'
         },
         {
           id: '5',
           title: 'vivo 32G双网通版',
-          price: '￥1099',
-          oldprice: '￥1499',
+          price: '1099',
+          oldprice: '1499',
           state: '热卖中',
           left: '23'
         }
@@ -69,8 +69,9 @@ export default {
     }
   },
   methods: {
-    goInfo (id) {
-      this.$router.push(`/home/goodsinfo/${id}`)
+    goInfo (id, price, title) {
+      console.log(id)
+      this.$router.push(`/home/goodsinfo/${id}/${price}/${title}`)
     }
   }
 }

@@ -29,7 +29,7 @@ export default {
       iconlist: [
         {
           value: 0,
-          icon: '/images/menu1.png', //images要放在public文件夹下
+          icon: '/images/menu1.png', // images要放在public文件夹下
           text: '新闻资讯',
           path: '/home/newslist'
         },

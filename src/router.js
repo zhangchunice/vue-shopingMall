@@ -23,6 +23,6 @@ export default new Router({
     { path: '/home/newsinfo/:id', component: NewsInfo },
     { path: '/home/photolist', component: () => import('./components/home/PhotoList.vue') },
     { path: '/home/goodslist', component: () => import('./components/home/goodsList.vue') },
-    { path: '/home/goodsinfo/:id', component: () => import('./components/home/goodsinfo.vue') }
+    { path: '/home/goodsinfo/:id/:price/:title', component: () => import('./components/home/goodsinfo.vue') }
   ]
 })

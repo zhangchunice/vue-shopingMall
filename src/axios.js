@@ -11,9 +11,7 @@ import axios from 'axios'
 axios.defaults.timeout = 10000 // 超时时间
 axios.defaults.baseURL = '/api' // 默认地址
 
-// const service = axios.create({
-//   baseURL: '/api',
-//   timeout: 5000
-// })
+// this.$axios.post("mark",params)
+// this.$axios.get("/book/catalog/"+userId)
 
 export default axios
